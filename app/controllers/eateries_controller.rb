@@ -1,5 +1,6 @@
 # coding: utf-8
 class EateriesController < ApplicationController
+before_action :login_required
   def new
   end
 
@@ -14,6 +15,14 @@ private
 
 def eatery_params
   params.require(:eatery).permit(:name)
+end
+
+def user_params
+  params.require(:user).permit(:name,:password,:password_confirmation)
+end
+
+def login_required
+  redirect_to login_path unless corrent_user
 end
 
 end
